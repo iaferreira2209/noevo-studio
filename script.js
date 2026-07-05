@@ -159,11 +159,24 @@ const bookingState = {
 };
 
 function initBooking() {
-  // Service cards in services section
+  // Service cards in services section (showcase) - agora funcionam como atalho
+  // inteligente: pré-selecionam o serviço e já levam direto pro agendamento
   document.querySelectorAll('.service-card').forEach(card => {
     card.addEventListener('click', () => {
       document.querySelectorAll('.service-card').forEach(c => c.classList.remove('active'));
       card.classList.add('active');
+
+      const serviceKey = card.dataset.service;
+      const matchingSelectCard = document.querySelector(`.service-select-card[data-service="${serviceKey}"]`);
+      if (matchingSelectCard) {
+        document.querySelectorAll('.service-select-card').forEach(c => c.classList.remove('selected'));
+        matchingSelectCard.classList.add('selected');
+        bookingState.service = matchingSelectCard.dataset.service;
+        bookingState.servicePrice = matchingSelectCard.dataset.price;
+        updateBookingButton();
+      }
+
+      scrollToBookingPanel();
     });
   });
 
@@ -324,15 +337,27 @@ function initScrollReveal() {
 }
 
 /* --- Smooth Scroll --- */
+function scrollToBookingPanel() {
+  scrollToElement(document.getElementById('bookingPanel'));
+}
+
+function scrollToElement(target) {
+  if (!target) return;
+  const navbar = document.querySelector('.navbar');
+  const offset = (navbar ? navbar.offsetHeight : 80) + 16;
+  const y = target.getBoundingClientRect().top + window.pageYOffset - offset;
+  window.scrollTo({ top: y, behavior: 'smooth' });
+}
+
 function initSmoothScroll() {
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', (e) => {
-      e.preventDefault();
-      const target = document.querySelector(anchor.getAttribute('href'));
+      const href = anchor.getAttribute('href');
+      if (href.length <= 1) return; // ignora href="#"
+      const target = document.querySelector(href);
       if (target) {
-        const offset = 80;
-        const y = target.getBoundingClientRect().top + window.pageYOffset - offset;
-        window.scrollTo({ top: y, behavior: 'smooth' });
+        e.preventDefault();
+        scrollToElement(target);
       }
     });
   });

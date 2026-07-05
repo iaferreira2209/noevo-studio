@@ -177,6 +177,18 @@ ul, ol {
   background: transparent;
 }
 
+/* Garante que qualquer navegação por âncora (inclusive sem JS) pare
+   abaixo da navbar fixa, e não atrás dela */
+#inicio,
+#servicos,
+#equipe,
+#galeria,
+#agendar,
+#bookingPanel,
+#contato {
+  scroll-margin-top: 96px;
+}
+
 .navbar.scrolled {
   background: var(--bg-glass-strong);
   backdrop-filter: blur(20px);
@@ -1171,6 +1183,8 @@ ul, ol {
   border-radius: var(--radius-xl);
   width: 90%;
   max-width: 440px;
+  max-height: 90vh;
+  overflow-y: auto;
   padding: var(--space-2xl);
   transform: scale(0.9) translateY(20px);
   transition: var(--transition-base);
@@ -1569,6 +1583,11 @@ ul, ol {
 
   .booking-info {
     position: static;
+    order: 2;
+  }
+
+  .booking-panel {
+    order: 1;
   }
 
   .contact-grid {
