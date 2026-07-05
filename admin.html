@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Área do Barbeiro - NOEVO STUDIO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="admin-body">
+
+  <!-- ADMIN LOGIN OVERLAY -->
+  <div id="adminLoginOverlay" class="admin-overlay active">
+    <div class="admin-login-box">
+      <h2 class="admin-title">Área Restrita</h2>
+      <p class="admin-desc">Insira a senha mestra do estúdio para acessar as agendas.</p>
+      <input type="password" id="adminPassword" class="admin-input" placeholder="Senha" />
+      <button id="btnAdminLogin" class="booking-btn admin-btn">Entrar</button>
+      <a href="index.html" class="admin-back">Voltar ao site</a>
+    </div>
+  </div>
+
+  <!-- ADMIN DASHBOARD -->
+  <div id="adminDashboard" class="admin-dashboard">
+    <header class="admin-header">
+      <div class="container admin-header-inner">
+        <h1 class="logo">NOEVO <span>Admin</span></h1>
+        <button id="btnAdminLogout" class="admin-logout-logo" title="Sair da Área do Barbeiro">
+          <img src="assets/img/hero_new.jpg" alt="NOEVO Logo Sair">
+        </button>
+      </div>
+    </header>
+
+    <main class="container admin-main">
+      <div class="admin-controls">
+        <h2 class="section-title">Agenda</h2>
+        <select id="adminBarberSelect" class="barber-select">
+          <option value="Todos">Todos os Barbeiros</option>
+          <option value="Lucas">Lucas</option>
+          <option value="Isaías">Isaías</option>
+          <option value="Matheus">Matheus</option>
+          <option value="Caio">Caio</option>
+        </select>
+      </div>
+
+      <div class="admin-date-filter" id="adminDateFilter">
+        <!-- Date buttons rendered by JS -->
+      </div>
+
+      <div class="admin-bookings" id="adminBookingsList">
+        <!-- Bookings will be rendered here by JS -->
+      </div>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="supabase-config.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
